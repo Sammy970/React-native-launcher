@@ -38,8 +38,6 @@ const App = () => {
     try {
       let installedApps = await AppListModule.getInstalledApps();
 
-      console.log('[Launcher] Installed apps:', installedApps);
-
       // check if settings is there or not, if not add it
       const settingsApp = installedApps.find(
         (app: AppInfo) => app.packageName === 'com.android.settings',
