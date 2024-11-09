@@ -1,79 +1,92 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# rnTVLauncher
 
-# Getting Started
+rnTVLauncher is a custom launcher application specifically designed for Android TV. This launcher leverages React Native (React Native TVOS) and native modules to provide a seamless and integrated experience. The application requests accessibility settings to make it the default launcher and intercepts calls to ensure it remains the default launcher. Additionally, the app automatically starts when the TV is powered on.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Features
 
-## Step 1: Start the Metro Server
+- Custom launcher for Android TV
+- Requests accessibility settings to set as the default launcher
+- Intercepts calls to maintain default launcher status
+- Automatically starts when the TV is powered on
+- Displays a grid of installed applications
+- Allows launching of installed applications
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+## Installation
 
-```bash
-# using npm
-npm start
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/yourusername/rnTVLauncher.git
+    cd rnTVLauncher
+    ```
 
-# OR using Yarn
-yarn start
-```
+2. Install dependencies:
+    ```sh
+    npm install
+    ```
 
-## Step 2: Start your Application
+3. Set up the Android project:
+    ```sh
+    cd android
+    ./gradlew clean
+    cd ..
+    ```
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+4. Start the Metro bundler:
+    ```sh
+    npm start
+    ```
 
-### For Android
+5. Run the application on Android TV:
+    ```sh
+    npm run android
+    ```
 
-```bash
-# using npm
-npm run android
+## Usage
 
-# OR using Yarn
-yarn android
-```
+1. When the application is launched for the first time, it will request accessibility settings to set itself as the default launcher.
+2. Once accessibility settings are enabled, the launcher will intercept calls to ensure it remains the default launcher.
+3. The launcher will automatically start when the TV is powered on.
+4. The main screen displays a grid of installed applications. You can navigate through the applications and launch them by pressing the select button on the remote.
 
-### For iOS
+## Code Overview
 
-```bash
-# using npm
-npm run ios
+### `App.tsx`
 
-# OR using Yarn
-yarn ios
-```
+This is the main React Native component that renders the grid of installed applications. It uses the `AppListModule` native module to fetch the list of installed applications and allows launching them.
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+### `android/app/src/main/AndroidManifest.xml`
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+This file contains the Android manifest configuration, including permissions, features, and components such as activities, receivers, and services.
 
-## Step 3: Modifying your App
+### `android/app/src/main/java/com/rntvlauncher/AppListModule.kt`
 
-Now that you have successfully run the app, let's modify it.
+This Kotlin file defines the `AppListModule` native module, which provides methods to fetch the list of installed applications and launch them.
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+### `android/app/src/main/java/com/rntvlauncher/AppListPackage.kt`
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+This Kotlin file defines the `AppListPackage` class, which registers the `AppListModule` native module.
 
-## Congratulations! :tada:
+### `android/app/src/main/java/com/rntvlauncher/BootReceiver.kt`
 
-You've successfully run and modified your React Native App. :partying_face:
+This Kotlin file defines the `BootReceiver` class, which ensures the launcher starts automatically when the TV is powered on.
 
-### Now what?
+### `android/app/src/main/java/com/rntvlauncher/HomeButtonService.kt`
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+This Kotlin file defines the `HomeButtonService` class, which intercepts calls to maintain the launcher as the default launcher.
 
-# Troubleshooting
+### `android/app/src/main/java/com/rntvlauncher/MainApplication.kt`
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+This Kotlin file defines the `MainApplication` class, which initializes the React Native application and registers the native modules.
 
-# Learn More
+### `android/app/src/main/res/xml/accessibility_service_config.xml`
 
-To learn more about React Native, take a look at the following resources:
+This XML file defines the configuration for the accessibility service.
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request if you have any improvements or bug fixes.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
