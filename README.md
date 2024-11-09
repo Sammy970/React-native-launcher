@@ -16,7 +16,7 @@ rnTVLauncher is a custom launcher application specifically designed for Android 
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/rnTVLauncher.git
+    git clone https://github.com/Sammy970/React-native-launcher.git
     cd rnTVLauncher
     ```
 
