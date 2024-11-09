@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">rnTVLauncher</string>
+    <string name="accessibility_service_description">Enables launcher home button functionality</string>
 </resources>
